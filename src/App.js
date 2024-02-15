@@ -5,10 +5,11 @@ import { uid } from "uid";
 import List from "./Components/List";
 
 function App() {
-  const [activities, setActivities] = useState("");
+  const [activities, setActivities] = useState([]);
 
   function handleAddActivity(data) {
-    setActivities([{ ...data, id: uid() }]);
+    const newActivity = { ...data, id: uid() };
+    setActivities([...activities, newActivity]);
   }
 
   console.log(activities);
