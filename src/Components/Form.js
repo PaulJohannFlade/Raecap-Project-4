@@ -1,4 +1,4 @@
-export default function Form({ onAddActivity }) {
+export default function Form({ onAddActivity, isGoodWeather }) {
   function handleSubmitEvent(event) {
     event.preventDefault();
 
@@ -20,7 +20,11 @@ export default function Form({ onAddActivity }) {
 
   return (
     <>
-      <h1>Activity</h1>
+      <h1>
+        {isGoodWeather
+          ? "Activities for Good Weather"
+          : "Activities for Bad Weather"}
+      </h1>
       <form onSubmit={handleSubmitEvent}>
         <label htmlFor="activity"></label>
         <input name="activity" id="activity" type="text" />
