@@ -9,7 +9,7 @@ function App() {
     defaultValue: [],
   });
 
-  const isGoodWeather = true;
+  const isGoodWeather = false;
 
   function handleAddActivity(data) {
     const newActivity = {
@@ -20,31 +20,20 @@ function App() {
     setActivities([...activities, newActivity]);
   }
 
-  // function filterWeather() {
-  //   if (isGoodWeather === true) {
-  //     activities.filter((activity) => {
-  //       const weather = activity.isForGoodWeather === true;
-  //       return weather;
-  //     });
-  //   }
+  const filterActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === isGoodWeather
+  );
 
-  //   filterWeather();
-
-  function filterWeather(boolean) {
-    const WeatherActivities = activities.filter((activity) => {
-      return activity.isForGoodWeather === boolean;
-    });
-    return WeatherActivities;
-  }
-  console.log("Weather:", isGoodWeather);
-
-  filterWeather(isGoodWeather);
-
-  // console.log(WeatherActivities);
+  console.log(filterActivities);
 
   return (
     <>
-      <List activities={activities} />
+      <h1>
+        {isGoodWeather
+          ? "Activities for Good Weather"
+          : "Activities for Bad Weather"}
+      </h1>
+      <List activities={filterActivities} />
       <Form onAddActivity={handleAddActivity} isGoodWeather={isGoodWeather} />
     </>
   );
