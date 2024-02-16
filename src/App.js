@@ -1,18 +1,42 @@
 import "./App.css";
 import Form from "./Components/Form";
-import { useState } from "react";
 import { uid } from "uid";
+import List from "./Components/List";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [activities, setActivities] = useState("");
+  const [activities, setActivities] = useLocalStorageState("Activities", {
+    defaultValue: [],
+  });
+
+  const isGoodWeather = false;
 
   function handleAddActivity(data) {
-    setActivities({ ...data, id: uid() });
+    const newActivity = {
+      ...data,
+      id: uid(),
+      isForGoodWeather: data.isForGoodWeather === "on" ? true : false,
+    };
+    setActivities([...activities, newActivity]);
   }
 
-  console.log(activities);
+  const filterActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === isGoodWeather
+  );
 
-  return <Form onAddActivity={handleAddActivity} />;
+  console.log(filterActivities);
+
+  return (
+    <>
+      <h1>
+        {isGoodWeather
+          ? "Activities for Good Weather"
+          : "Activities for Bad Weather"}
+      </h1>
+      <List activities={filterActivities} />
+      <Form onAddActivity={handleAddActivity} isGoodWeather={isGoodWeather} />
+    </>
+  );
 }
 
 export default App;
