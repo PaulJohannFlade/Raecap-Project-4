@@ -26,6 +26,10 @@ function App() {
 
   useEffect(() => {
     fetchWeatherApi();
+    const intervall = setInterval(() => {
+      fetchWeatherApi();
+    }, 5000);
+    return () => clearInterval(intervall);
   }, []);
 
   console.log(weatherData);
@@ -45,6 +49,13 @@ function App() {
     (activity) => activity.isForGoodWeather === weatherData.isGoodWeather
   );
 
+  function handleDeleteActivity(id) {
+    const arrayAfterDeleteActivity = activities.filter(
+      (activity) => activity.id !== id
+    );
+    setActivities(arrayAfterDeleteActivity);
+  }
+
   return (
     <>
       <h1>
@@ -57,7 +68,10 @@ function App() {
           ? "Activities for Good Weather"
           : "Activities for Bad Weather"}{" "}
       </h2>
-      <List activities={filterActivities} />
+      <List
+        activities={filterActivities}
+        onDeleteActivity={handleDeleteActivity}
+      />
       <Form
         onAddActivity={handleAddActivity}
         isGoodWeather={weatherData.isGoodWeather}
