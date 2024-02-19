@@ -1,0 +1,27 @@
+.activity__item {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  background-color: lightgray;
+  color: black;
+  padding: 5px;
+  width: 400px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.remove__item {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  padding: 0px;
+  vertical-align: middle;
+  line-height: 130%;
+
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  background-color: rgb(255, 161, 161);
+  border: transparent;
+}
