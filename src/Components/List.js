@@ -1,15 +1,18 @@
+import "./List.css";
+
 export default function List({ activities, onDeleteActivity }) {
   return (
     <ul>
       {activities.map((activity) => (
-        <li key={activity.id}>
+        <li className="activity__item" key={activity.id}>
           {activity.name}
           <button
+            className="remove__item"
             onClick={() => {
               onDeleteActivity(activity.id);
             }}
           >
-            x
+            ⓧ
           </button>
         </li>
       ))}
